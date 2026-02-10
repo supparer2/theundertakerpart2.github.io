@@ -1,5 +1,7 @@
+
 # build output
 dist/
+.output/
 
 # generated types
 .astro/
@@ -23,6 +25,13 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# vs code setting folder
+.vscode/
+
 # wrangler files
-.wrangler
-.dev.vars*
+.wrangler/
+.dev.vars
+
+# lost+found
+lost+found/
+
