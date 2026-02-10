@@ -656,11 +656,33 @@ const pageClass = 'movie-page';
       </div>
     </footer>
   </div>
+
+  <!-- Sticky Bottom Ad Banner -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 bg-slate-950 border-t border-slate-800 shadow-2xl">
+    <div class="flex justify-center items-center py-2">
+      <div id="sticky-ad-container" class="w-full max-w-[728px] h-[90px] flex items-center justify-center">
+        <script type="text/javascript">
+          atOptions = {
+            'key' : '9f1454b5bf06453a41fa5808a6dc8ca5',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="https://etiquettecosmicbeau.com/9f1454b5bf06453a41fa5808a6dc8ca5/invoke.js"></script>
+      </div>
+    </div>
+  </div>
 </MainLayout>
 
 <style>
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    padding-bottom: 110px; /* Space for sticky ad */
   }
 
   .line-clamp-3 {
@@ -674,6 +696,8 @@ const pageClass = 'movie-page';
     max-width: 100%;
   }
 </style>
+
+
 
 
 
