@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface VideoPlayerProps {
   movieTitle: string;
-  duration: number; // in minutes from database
+  duration: number;
   thumbnailUrl: string;
   youtubeVideoId?: string;
 }
@@ -10,8 +10,7 @@ interface VideoPlayerProps {
 export default function VideoPlayer({ 
   movieTitle, 
   duration, 
-  thumbnailUrl,
-  youtubeVideoId 
+  thumbnailUrl 
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isBuffering, setIsBuffering] = useState(false);
@@ -19,13 +18,11 @@ export default function VideoPlayer({
   const [volume, setVolume] = useState(100);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const videoRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
   const totalDurationInSeconds = duration * 60;
 
-  // Format time to MM:SS or HH:MM:SS
   const formatTime = (seconds: number) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
@@ -37,19 +34,16 @@ export default function VideoPlayer({
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // Handle play/pause
   const togglePlay = () => {
     if (isPlaying) {
       setIsPlaying(false);
     } else {
       setIsPlaying(true);
-      // Simulate buffering
       setIsBuffering(true);
       setTimeout(() => setIsBuffering(false), 1500);
     }
   };
 
-  // Handle progress bar click
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!progressRef.current) return;
     
@@ -63,7 +57,6 @@ export default function VideoPlayer({
     setTimeout(() => setIsBuffering(false), 800);
   };
 
-  // Handle volume change
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseInt(e.target.value);
     setVolume(newVolume);
@@ -74,12 +67,10 @@ export default function VideoPlayer({
     }
   };
 
-  // Toggle mute
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
 
-  // Auto-hide controls
   const handleMouseMove = () => {
     setShowControls(true);
     if (controlsTimeoutRef.current) {
@@ -92,7 +83,6 @@ export default function VideoPlayer({
     }
   };
 
-  // Simulate video progress
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isPlaying && !isBuffering) {
@@ -113,14 +103,13 @@ export default function VideoPlayer({
 
   return (
     <div 
-      className="relative w-full aspect-video bg-black rounded-lg overflow-hidden group"
+      className="relative w-full aspect-video bg-black rounded-lg overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => isPlaying && setShowControls(false)}
-      ref={videoRef}
     >
-      {/* Background Thumbnail */}
+      {/* Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center transition-all duration-500"
         style={{ 
           backgroundImage: `url(${thumbnailUrl})`,
           filter: isPlaying ? 'blur(20px) brightness(0.3)' : 'brightness(0.5)'
@@ -142,13 +131,10 @@ export default function VideoPlayer({
       {isBuffering && (
         <div className="absolute inset-0 flex items-center justify-center z-30">
           <div className="relative">
-            {/* Outer rotating ring */}
             <div className="w-24 h-24 border-4 border-white/20 rounded-full animate-spin border-t-white border-r-white" />
-            {/* Inner pulsing circle */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-16 h-16 bg-white/10 rounded-full animate-pulse" />
             </div>
-            {/* Center dot */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-4 h-4 bg-white rounded-full" />
             </div>
@@ -156,7 +142,7 @@ export default function VideoPlayer({
         </div>
       )}
 
-      {/* Play/Pause Overlay Button */}
+      {/* Play Button Overlay */}
       {!isPlaying && !isBuffering && (
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <button
@@ -170,7 +156,7 @@ export default function VideoPlayer({
         </div>
       )}
 
-      {/* Click to Play/Pause anywhere */}
+      {/* Click Area */}
       {isPlaying && !isBuffering && (
         <div 
           className="absolute inset-0 z-10 cursor-pointer"
@@ -178,7 +164,7 @@ export default function VideoPlayer({
         />
       )}
 
-      {/* Bottom Controls */}
+      {/* Controls */}
       <div 
         className={`absolute bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 transition-all duration-300 ${
           showControls || !isPlaying ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
@@ -202,7 +188,6 @@ export default function VideoPlayer({
         <div className="flex items-center justify-between gap-4">
           {/* Left Controls */}
           <div className="flex items-center gap-3">
-            {/* Play/Pause Button */}
             <button
               onClick={togglePlay}
               className="text-white hover:text-red-500 transition-colors p-1"
@@ -219,7 +204,6 @@ export default function VideoPlayer({
               )}
             </button>
 
-            {/* Time Display */}
             <div className="text-white text-sm font-medium min-w-[100px]">
               {formatTime(currentTime)} / {formatTime(totalDurationInSeconds)}
             </div>
@@ -249,7 +233,6 @@ export default function VideoPlayer({
                 )}
               </button>
 
-              {/* Volume Slider */}
               <div className="w-0 group-hover/volume:w-20 overflow-hidden transition-all duration-300">
                 <input
                   type="range"
@@ -257,7 +240,7 @@ export default function VideoPlayer({
                   max="100"
                   value={isMuted ? 0 : volume}
                   onChange={handleVolumeChange}
-                  className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+                  className="volume-slider w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer"
                   style={{
                     background: `linear-gradient(to right, #ef4444 0%, #ef4444 ${isMuted ? 0 : volume}%, rgba(255,255,255,0.2) ${isMuted ? 0 : volume}%, rgba(255,255,255,0.2) 100%)`
                   }}
@@ -265,7 +248,6 @@ export default function VideoPlayer({
               </div>
             </div>
 
-            {/* Movie Title */}
             <div className="text-white text-sm font-semibold max-w-[200px] truncate hidden sm:block">
               {movieTitle}
             </div>
@@ -273,9 +255,9 @@ export default function VideoPlayer({
         </div>
       </div>
 
-      {/* Custom CSS for slider */}
-      <style>{`
-        .slider::-webkit-slider-thumb {
+      <style jsx>{`
+        .volume-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
           appearance: none;
           width: 12px;
           height: 12px;
@@ -285,7 +267,7 @@ export default function VideoPlayer({
           box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .slider::-moz-range-thumb {
+        .volume-slider::-moz-range-thumb {
           width: 12px;
           height: 12px;
           border-radius: 50%;
