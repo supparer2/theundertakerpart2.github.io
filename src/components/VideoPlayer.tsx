@@ -103,13 +103,14 @@ export default function VideoPlayer({
 
   return (
     <div 
-      className="relative w-full aspect-video bg-black rounded-lg overflow-hidden"
+      className="relative w-full bg-black rounded-lg overflow-hidden"
+      style={{ aspectRatio: '16/9', minHeight: '400px' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => isPlaying && setShowControls(false)}
     >
-      {/* Background */}
+      {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center transition-all duration-500"
+        className="absolute inset-0 bg-cover bg-center transition-all duration-500 z-0"
         style={{ 
           backgroundImage: `url(${thumbnailUrl})`,
           filter: isPlaying ? 'blur(20px) brightness(0.3)' : 'brightness(0.5)'
@@ -129,7 +130,7 @@ export default function VideoPlayer({
 
       {/* Buffering Spinner */}
       {isBuffering && (
-        <div className="absolute inset-0 flex items-center justify-center z-30">
+        <div className="absolute inset-0 flex items-center justify-center z-30 bg-black/20">
           <div className="relative">
             <div className="w-24 h-24 border-4 border-white/20 rounded-full animate-spin border-t-white border-r-white" />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -147,7 +148,8 @@ export default function VideoPlayer({
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <button
             onClick={togglePlay}
-            className="w-20 h-20 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 hover:scale-110"
+            className="w-20 h-20 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 hover:scale-110 active:scale-95"
+            aria-label="Play video"
           >
             <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
               <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
@@ -156,7 +158,7 @@ export default function VideoPlayer({
         </div>
       )}
 
-      {/* Click Area */}
+      {/* Click Area for Pause */}
       {isPlaying && !isBuffering && (
         <div 
           className="absolute inset-0 z-10 cursor-pointer"
@@ -166,7 +168,7 @@ export default function VideoPlayer({
 
       {/* Controls */}
       <div 
-        className={`absolute bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4 transition-all duration-300 ${
+        className={`absolute bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-4 transition-all duration-300 ${
           showControls || !isPlaying ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
         }`}
       >
@@ -185,7 +187,7 @@ export default function VideoPlayer({
         </div>
 
         {/* Controls Row */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4 flex-wrap">
           {/* Left Controls */}
           <div className="flex items-center gap-3">
             <button
@@ -255,7 +257,7 @@ export default function VideoPlayer({
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .volume-slider::-webkit-slider-thumb {
           -webkit-appearance: none;
           appearance: none;
