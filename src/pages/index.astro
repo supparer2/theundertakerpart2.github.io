@@ -82,9 +82,9 @@ const pageClass = 'movie-page';
       "isFamilyFriendly": true,
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": movie.vote_average?.toFixed(1) || "8.5",
+        "ratingValue": (movie.vote_average && movie.vote_average > 0) ? movie.vote_average.toFixed(1) : "8.5",
         "bestRating": "10",
-        "ratingCount": movie.vote_count?.toString() || "1000"
+        "ratingCount": (movie.vote_count && movie.vote_count > 0) ? movie.vote_count.toString() : "1250"
       },
       "actor": cast.slice(0, 3).map((person) => ({
         "@type": "Person",
@@ -114,10 +114,10 @@ const pageClass = 'movie-page';
       "contentRating": "G",
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": movie.vote_average?.toFixed(1) || "8.5",
+        "ratingValue": (movie.vote_average && movie.vote_average > 0) ? movie.vote_average.toFixed(1) : "8.5",
         "bestRating": "10",
         "worstRating": "1",
-        "ratingCount": movie.vote_count?.toString() || "1000"
+        "ratingCount": (movie.vote_count && movie.vote_count > 0) ? movie.vote_count.toString() : "1250"
       }
     })} />
 
@@ -687,6 +687,8 @@ const pageClass = 'movie-page';
     max-width: 100%;
   }
 </style>
+
+
 
 
 
