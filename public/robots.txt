@@ -1,23 +1,19 @@
-# robots.txt for Thai Movie Streaming - สัปเหร่อ 2 เต็มเรื่อง
+# robots.txt for สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2)
+# https://supparer2.github.io/theundertakerpart2.github.io/
 
-# Allow all search engines
 User-agent: *
 Allow: /
-
-# Disallow admin or private directories (if any)
 Disallow: /api/
-Disallow: /_astro/
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
 
 # Sitemap location
 Sitemap: https://supparer2.github.io/theundertakerpart2.github.io/sitemap.xml
 
-# Crawl-delay for polite crawling (optional)
-Crawl-delay: 1
-
-# Specific rules for major search engines
+# Google bots
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0
 
 User-agent: Googlebot-Image
 Allow: /
@@ -25,38 +21,10 @@ Allow: /
 User-agent: Googlebot-Video
 Allow: /
 
+# Bing bot
 User-agent: Bingbot
 Allow: /
+
+# Crawl delay for other bots
+User-agent: *
 Crawl-delay: 1
-
-User-agent: Slurp
-Allow: /
-Crawl-delay: 1
-
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Baiduspider
-Allow: /
-Crawl-delay: 2
-
-# Social Media Crawlers
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-# Block bad bots (optional)
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
