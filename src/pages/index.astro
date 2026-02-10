@@ -1,0 +1,407 @@
+---
+import MainLayout from '../layouts/main.astro';
+import { baseUrl } from '../lib/base-url';
+
+const apiKey = 'bd51681eae50b9c4e9ef389ce8b12771';
+const movieId = '1363620';
+
+// Fetch movie details from TMDB API
+const movieResponse = await fetch(
+  `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=th-TH`
+);
+const movie = await movieResponse.json();
+
+// Fetch movie videos (trailers)
+const videosResponse = await fetch(
+  `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=th-TH`
+);
+const videosData = await videosResponse.json();
+const videos = videosData.results || [];
+
+// Fetch movie credits (cast)
+const creditsResponse = await fetch(
+  `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`
+);
+const credits = await creditsResponse.json();
+const cast = credits.cast?.slice(0, 8) || [];
+
+// SEO metadata with long tail keywords
+const title = `${movie.title || movie.original_title} (2025) - ดูหนังไทยออนไลน์ฟรี HD เต็มเรื่อง`;
+const description = `ดูหนัง ${movie.title || movie.original_title} (2025) หนังไทยแนวดราม่าโรแมนติกออนไลน์ฟรี พากย์ไทย ซับไทย เต็มเรื่อง HD 1080p คมชัด ไม่กระตุก ${movie.overview || ''}`;
+const keywords = `ดูหนังไทยออนไลน์, ${movie.title}, หนังไทย 2025, ดูหนังฟรี HD, หนังดราม่าไทย, หนังโรแมนติกไทย, streaming movie online, thai movie free, หนังเต็มเรื่อง, ดูหนังไม่กระตุก`;
+
+const pageClass = 'movie-page';
+---
+
+<MainLayout pageClass={pageClass} title={title}>
+  <Fragment slot="head">
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} />
+    <meta property="og:type" content="video.movie" />
+    <meta property="og:url" content="https://supparer2.github.io/theundertakerpart2.github.io/" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} />
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Thai" />
+    <meta name="author" content="Thai Movie Streaming" />
+    <link rel="canonical" href="https://supparer2.github.io/theundertakerpart2.github.io/" />
+  </Fragment>
+
+  <div class="min-h-screen bg-slate-950">
+    <!-- Hero Section with Backdrop -->
+    <div class="relative w-full h-screen max-h-[800px] overflow-hidden">
+      <!-- Backdrop Image -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          alt={`${movie.title} backdrop`}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/70 to-slate-950"></div>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
+        <div class="max-w-4xl space-y-6">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 rounded-full text-sm font-semibold text-white shadow-lg">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+            </span>
+            กำลังฉาย
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 drop-shadow-2xl leading-tight">
+            {movie.title || movie.original_title}
+          </h1>
+
+          <div class="flex flex-wrap gap-3 items-center">
+            <div class="flex items-center gap-2 bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold text-lg shadow-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              {movie.vote_average?.toFixed(1)}
+            </div>
+            
+            <span class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow-lg">
+              {movie.release_date ? new Date(movie.release_date).getFullYear() : '2025'}
+            </span>
+            
+            <span class="bg-slate-800 text-white px-4 py-2 rounded-lg font-medium shadow-lg">
+              {Math.floor(movie.runtime / 60)} ชม. {movie.runtime % 60} นาที
+            </span>
+            
+            {movie.genres?.slice(0, 2).map((genre: any) => (
+              <span class="bg-slate-800 text-white px-4 py-2 rounded-lg font-medium shadow-lg">
+                {genre.name}
+              </span>
+            ))}
+          </div>
+
+          <p class="text-xl text-gray-300 max-w-3xl leading-relaxed line-clamp-3">
+            {movie.overview || 'เตรียมพบกับหนังที่น่าติดตามที่สุดในปีนี้'}
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a href="#watch" class="group inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+              </svg>
+              ดูหนังเลย
+            </a>
+            
+            <a href="#info" class="inline-flex items-center gap-3 bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl transition-all duration-300 border-2 border-slate-700 hover:border-slate-600">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              รายละเอียด
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <!-- Movie Player Section -->
+      <section id="watch" class="mb-16 scroll-mt-20">
+        <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
+          <div class="p-6 border-b border-slate-800">
+            <h2 class="text-3xl font-bold text-white flex items-center gap-3">
+              <div class="w-1 h-8 bg-red-600 rounded-full"></div>
+              ดูหนังออนไลน์
+            </h2>
+          </div>
+          <div class="aspect-video bg-black flex items-center justify-center relative">
+            {videos.length > 0 && videos[0].key ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${videos[0].key}?autoplay=0&rel=0`}
+                title={`${movie.title} Trailer`}
+                class="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            ) : (
+              <div class="text-center p-12">
+                <div class="inline-flex items-center justify-center w-32 h-32 rounded-full bg-slate-900 mb-6 border-4 border-slate-800">
+                  <svg class="w-16 h-16 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+                  </svg>
+                </div>
+                <p class="text-2xl text-gray-400 font-semibold">เตรียมพบกับหนังเร็วๆ นี้</p>
+                <p class="text-gray-500 mt-2">วิดีโอจะอัพเดทเร็วๆ นี้</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <div class="grid lg:grid-cols-3 gap-8 lg:gap-12" id="info">
+        <!-- Left Column: Poster & Info -->
+        <div class="lg:col-span-1 space-y-8">
+          <!-- Poster -->
+          <div class="overflow-hidden rounded-2xl shadow-2xl transform transition-transform duration-300 hover:scale-105">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={`${movie.title} poster`}
+              class="w-full rounded-2xl"
+            />
+          </div>
+          
+          <!-- Movie Info Card -->
+          <div class="bg-slate-900 rounded-2xl p-6 lg:p-8 shadow-2xl border border-slate-800">
+            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <div class="w-1 h-6 bg-blue-600 rounded-full"></div>
+              ข้อมูลหนัง
+            </h3>
+            <dl class="space-y-5">
+              <div class="border-b border-slate-800 pb-4">
+                <dt class="text-gray-400 text-sm mb-2 font-medium">ชื่อเรื่อง</dt>
+                <dd class="text-white font-semibold text-lg">{movie.title}</dd>
+              </div>
+              <div class="border-b border-slate-800 pb-4">
+                <dt class="text-gray-400 text-sm mb-2 font-medium">ชื่อต้นฉบับ</dt>
+                <dd class="text-white font-semibold">{movie.original_title}</dd>
+              </div>
+              <div class="border-b border-slate-800 pb-4">
+                <dt class="text-gray-400 text-sm mb-2 font-medium">วันที่เข้าฉาย</dt>
+                <dd class="text-white font-semibold">
+                  {movie.release_date ? new Date(movie.release_date).toLocaleDateString('th-TH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  }) : 'เร็วๆ นี้'}
+                </dd>
+              </div>
+              <div class="border-b border-slate-800 pb-4">
+                <dt class="text-gray-400 text-sm mb-2 font-medium">ประเทศ</dt>
+                <dd class="text-white font-semibold">{movie.production_countries?.[0]?.name || 'Thailand'}</dd>
+              </div>
+              <div class="border-b border-slate-800 pb-4">
+                <dt class="text-gray-400 text-sm mb-2 font-medium">ภาษา</dt>
+                <dd class="text-white font-semibold">ไทย</dd>
+              </div>
+              <div>
+                <dt class="text-gray-400 text-sm mb-2 font-medium">งบประมาณ</dt>
+                <dd class="text-white font-semibold">
+                  {movie.budget > 0 ? `$${movie.budget.toLocaleString()}` : 'N/A'}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Right Column: Description & Cast -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Synopsis -->
+          <section class="bg-slate-900 rounded-2xl p-6 lg:p-8 shadow-2xl border border-slate-800">
+            <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+              <div class="w-1 h-8 bg-purple-600 rounded-full"></div>
+              เรื่องย่อ
+            </h2>
+            <p class="text-gray-300 leading-relaxed text-lg">
+              {movie.overview || 'เรื่องย่อจะปรับปรุงเร็วๆ นี้'}
+            </p>
+          </section>
+
+          <!-- Cast -->
+          {cast.length > 0 && (
+            <section class="bg-slate-900 rounded-2xl p-6 lg:p-8 shadow-2xl border border-slate-800">
+              <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                <div class="w-1 h-8 bg-green-600 rounded-full"></div>
+                นักแสดง
+              </h2>
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                {cast.map((person: any) => (
+                  <div class="text-center transform transition-all duration-300 hover:scale-105">
+                    <div class="bg-slate-800 rounded-xl overflow-hidden mb-3 aspect-[2/3] shadow-xl border border-slate-700">
+                      {person.profile_path ? (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w185${person.profile_path}`}
+                          alt={person.name}
+                          class="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div class="w-full h-full flex items-center justify-center bg-slate-800">
+                          <svg class="w-20 h-20 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    <p class="font-bold text-white text-sm mb-1">{person.name}</p>
+                    <p class="text-gray-400 text-xs">{person.character}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <!-- SEO Content -->
+          <section class="bg-slate-900 rounded-2xl p-6 lg:p-8 shadow-2xl border border-slate-800">
+            <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+              <div class="w-1 h-8 bg-red-600 rounded-full"></div>
+              ดูหนัง {movie.title} (2025) ออนไลน์ฟรี HD เต็มเรื่อง
+            </h2>
+            <div class="prose prose-invert max-w-none text-gray-300 space-y-6">
+              <p class="leading-relaxed text-lg">
+                <strong class="text-white">ดูหนังไทยออนไลน์ {movie.title}</strong> เต็มเรื่อง HD 1080p พากย์ไทย ซับไทย 
+                ไม่มีโฆษณาคั่น ดูฟรี ไม่ต้องสมัครสมาชิก ไม่กระตุก รับชม {movie.title} 
+                หนังไทยแนว{movie.genres?.[0]?.name || 'ดราม่า'}ที่น่าติดตามที่สุดในปี 2025
+              </p>
+              
+              <p class="leading-relaxed text-lg">
+                <strong class="text-white">หนังไทยใหม่ล่าสุด {movie.title} ({new Date(movie.release_date).getFullYear()})</strong> 
+                เป็นหนังที่ได้รับคะแนนสูงถึง {movie.vote_average?.toFixed(1)}/10 จากผู้ชมทั่วโลก 
+                ด้วยเนื้อเรื่องที่น่าติดตาม การแสดงที่โดดเด่น และการถ่ายทำที่สวยงาม 
+                ทำให้หนังเรื่องนี้กลายเป็นหนึ่งในหนังไทยที่ห้ามพลาดในปีนี้
+              </p>
+
+              <p class="leading-relaxed text-lg">
+                <strong class="text-white">ดูหนังออนไลน์ฟรี ไม่มีค่าใช้จ่าย</strong> เว็บไซต์ของเรานำเสนอ 
+                {movie.title} ให้คุณได้รับชมแบบสตรีมมิ่งคุณภาพ HD เต็มรูปแบบ 
+                รองรับการรับชมผ่านมือถือ แท็บเล็ต และคอมพิวเตอร์ทุกระบบ 
+                ไม่ว่าจะเป็น iOS, Android หรือ Windows ก็สามารถรับชมได้อย่างลื่นไหล
+              </p>
+
+              <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mt-8">
+                <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  ทำไมต้องดู {movie.title}?
+                </h3>
+                <ul class="space-y-3">
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>หนังไทยคุณภาพสูง HD 1080p ภาพชัดเสียงดัง</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>เนื้อเรื่องน่าติดตาม สร้างจากเรื่องจริง</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>นักแสดงมากฝีมือ การแสดงที่สมจริง</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>ได้รับคะแนนสูงจากนักวิจารณ์และผู้ชม</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>รับชมฟรี ไม่ต้องเสียค่าใช้จ่าย</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-green-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>ไม่ต้องดาวน์โหลด ดูออนไลน์ได้ทันที</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700 mt-8">
+                <h3 class="text-xl font-bold text-white mb-4">ข้อมูลการค้นหาที่เกี่ยวข้อง</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                  ดูหนังไทยออนไลน์ฟรี, {movie.title} full movie, หนังไทย 2025, 
+                  ดูหนังใหม่ HD, หนังดราม่าไทย, หนังโรแมนติก, thai movie streaming, 
+                  ดูหนังไม่กระตุก, หนังเต็มเรื่อง พากย์ไทย, ซับไทย, 
+                  {movie.genres?.map((g: any) => g.name).join(', ')}, 
+                  หนังไทยแนะนำ, หนังน่าดู 2025, movie online free
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-slate-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center space-y-4">
+          <div class="flex items-center justify-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center shadow-xl">
+              <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-white">Thai Movie Streaming</h3>
+          </div>
+          
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            ดูหนังไทยออนไลน์ฟรี HD เต็มเรื่อง ไม่มีโฆษณาคั่น รับชมผ่านมือถือ แท็บเล็ต และคอมพิวเตอร์
+          </p>
+          
+          <div class="pt-8 border-t border-slate-800 mt-8">
+            <p class="text-gray-500 text-sm">
+              © 2025 Thai Movie Streaming. All rights reserved.
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+              เว็บไซต์นี้จัดทำขึ้นเพื่อการศึกษาและเผยแพร่ข้อมูลเกี่ยวกับภาพยนตร์ | ข้อมูลจาก The Movie Database (TMDB)
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</MainLayout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prose {
+    max-width: 100%;
+  }
+</style>

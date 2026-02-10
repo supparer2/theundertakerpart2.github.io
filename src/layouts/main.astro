@@ -1,0 +1,39 @@
+
+
+---
+import { baseUrl } from '../lib/base-url';
+import '../../generated/fonts.css';
+import '../site-components/global.css';
+import '../styles/global.css';
+
+const { pageClass = '', title = 'Thai Movie Stream' } = Astro.props;
+---
+
+<html lang="th" class={pageClass}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href={`${baseUrl}/favicon.ico`} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<slot name="head" />
+	</head>
+	<!-- Dark mode class injection point - will be replaced with `dark` class based on your site palette -->
+	<body class="__DARK_MODE_CLASS__">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* Page-specific overrides */
+  html.splash main { 
+    display: flex !important; 
+  }
+  
+  html.splash ol,
+  html.splash ul { 
+    padding-left: 0 !important; 
+    margin: 0 !important; 
+  }
+</style>
+

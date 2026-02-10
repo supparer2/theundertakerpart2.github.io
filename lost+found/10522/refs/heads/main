@@ -1,0 +1,11 @@
+0000000000000000000000000000000000000000 214494f5186927bae60e024544f79b4f6c787962 Your Name <you@example.com> 1770707874 +0000	commit (initial): first commit
+214494f5186927bae60e024544f79b4f6c787962 214494f5186927bae60e024544f79b4f6c787962 Your Name <you@example.com> 1770707880 +0000	Branch: renamed refs/heads/main to refs/heads/main
+214494f5186927bae60e024544f79b4f6c787962 9a416a7cada48b12729de4116b1f9813ea57d0ce Your Name <you@example.com> 1770707956 +0000	commit: Your update message
+9a416a7cada48b12729de4116b1f9813ea57d0ce 9a416a7cada48b12729de4116b1f9813ea57d0ce Your Name <you@example.com> 1770707966 +0000	Branch: renamed refs/heads/main to refs/heads/main
+9a416a7cada48b12729de4116b1f9813ea57d0ce 78c465682c569bbdeee3af6371bdd73f2f8bc74b Your Name <you@example.com> 1770708089 +0000	commit: Remove workflow temporarily
+78c465682c569bbdeee3af6371bdd73f2f8bc74b 50fe9a6dd3db05cf2daa54872cef9392f7e45f66 Your Name <you@example.com> 1770708330 +0000	commit: Add GitHub Pages workflow
+50fe9a6dd3db05cf2daa54872cef9392f7e45f66 0d2ea6f3a38af1cb468619ed9b09dd5ac739cccd Your Name <you@example.com> 1770708352 +0000	commit: Remove workflow for now
+0d2ea6f3a38af1cb468619ed9b09dd5ac739cccd 6d8edc6ff273e6c69993e1f6086b8cb5a0c93db4 Your Name <you@example.com> 1770709128 +0000	commit: Fix base path for GitHub Pages
+6d8edc6ff273e6c69993e1f6086b8cb5a0c93db4 663f45cc4276b102b6d12c70fc969c3ba70c8f47 Your Name <you@example.com> 1770709248 +0000	commit: Fix CSS loading and asset paths for GitHub Pages
+663f45cc4276b102b6d12c70fc969c3ba70c8f47 9f21afd11196436db08db52b4cf330451119ca86 Your Name <you@example.com> 1770709449 +0000	commit: Fix broken styles - clean up CSS and HTML structure
+9f21afd11196436db08db52b4cf330451119ca86 8d741b4ff2efeb23371289c38ce586f23f5687cd Your Name <you@example.com> 1770709516 +0000	commit: Your update message
