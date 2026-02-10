@@ -3,6 +3,7 @@
 
 
 
+
 ---
 import MainLayout from '../layouts/main.astro';
 import { baseUrl } from '../lib/base-url';
@@ -43,13 +44,14 @@ const pageClass = 'movie-page';
   <Fragment slot="head">
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
+    <meta name="google-site-verification" content="sDo60bdMoYo6D0mJX5WtKgy0-o4H50-JFVHlGjCnowA" />
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} />
     <meta property="og:type" content="video.movie" />
-    <meta property="og:url" content="https://supparer2.github.io/" />
+    <meta property="og:url" content="https://supparer2.github.io/theundertakerpart2.github.io/" />
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -61,7 +63,132 @@ const pageClass = 'movie-page';
     <meta name="robots" content="index, follow" />
     <meta name="language" content="Thai" />
     <meta name="author" content="Thai Movie Streaming" />
-    <link rel="canonical" href="https://supparer2.github.io/" />
+    <link rel="canonical" href="https://supparer2.github.io/theundertakerpart2.github.io/" />
+    <link rel="sitemap" type="application/xml" href="https://supparer2.github.io/theundertakerpart2.github.io/sitemap.xml" />
+
+    <!-- Schema.org Structured Data - VideoObject -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2)",
+      "description": "ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังสยองขวัญไทย สัปเหร่อ 2 หลอนเข้มข้นกว่าที่เคย ความสยองกลับมาอีกครั้งเมื่ออดีตตามหลอกไม่รู้จบ ดูหนังออนไลน์ HD 1080p ไม่กระตุก",
+      "thumbnailUrl": "https://image.tmdb.org/t/p/original{movie.backdrop_path}",
+      "uploadDate": "{movie.release_date || '2025-01-01'}",
+      "duration": "PT{Math.floor(movie.runtime / 60)}H{movie.runtime % 60}M",
+      "contentUrl": "https://supparer2.github.io/theundertakerpart2.github.io/",
+      "embedUrl": "https://supparer2.github.io/theundertakerpart2.github.io/#watch",
+      "genre": ["สยองขวัญ", "ระทึกขวัญ", "หนังไทย"],
+      "inLanguage": "th-TH",
+      "isFamilyFriendly": false,
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{movie.vote_average?.toFixed(1) || '8.5'}",
+        "bestRating": "10",
+        "ratingCount": "{movie.vote_count || '1000'}"
+      },
+      "actor": {cast.slice(0, 3).map((person: any) => ({
+        "@type": "Person",
+        "name": person.name
+      }))}
+    }
+    </script>
+
+    <!-- Schema.org Structured Data - Movie -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Movie",
+      "name": "สัปเหร่อ 2",
+      "alternateName": ["The Undertaker 2", "Sup Pa Rer 2"],
+      "description": "{movie.overview || 'ความสยองกลับมาอีกครั้งใน สัปเหร่อ 2 เมื่ออดีตตามหลอกไม่รู้จบ'}",
+      "image": "https://image.tmdb.org/t/p/original{movie.poster_path}",
+      "datePublished": "{movie.release_date || '2025'}",
+      "director": {
+        "@type": "Person",
+        "name": "ผู้กำกับไทย"
+      },
+      "countryOfOrigin": {
+        "@type": "Country",
+        "name": "Thailand"
+      },
+      "inLanguage": "th",
+      "genre": ["Horror", "Thriller"],
+      "contentRating": "18+",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{movie.vote_average?.toFixed(1) || '8.5'}",
+        "bestRating": "10",
+        "worstRating": "1",
+        "ratingCount": "{movie.vote_count || '1000'}"
+      }
+    }
+    </script>
+
+    <!-- Schema.org Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "หน้าแรก",
+        "item": "https://supparer2.github.io/theundertakerpart2.github.io/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "หนังสยองขวัญไทย",
+        "item": "https://supparer2.github.io/theundertakerpart2.github.io/#info"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "สัปเหร่อ 2 เต็มเรื่อง",
+        "item": "https://supparer2.github.io/theundertakerpart2.github.io/#watch"
+      }]
+    }
+    </script>
+
+    <!-- Schema.org Structured Data - WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Thai Movie Streaming - ดูหนังไทยออนไลน์ฟรี",
+      "alternateName": "สัปเหร่อ 2 เต็มเรื่อง",
+      "url": "https://supparer2.github.io/theundertakerpart2.github.io/",
+      "description": "ดูหนังไทยออนไลน์ฟรี HD เต็มเรื่อง สัปเหร่อ 2 พากย์ไทย ซับไทย ไม่มีโฆษณาคั่น",
+      "inLanguage": "th-TH",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://supparer2.github.io/theundertakerpart2.github.io/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Schema.org Structured Data - Organization (Thailand) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Thai Movie Streaming",
+      "url": "https://supparer2.github.io/theundertakerpart2.github.io/",
+      "logo": "https://image.tmdb.org/t/p/original/z3T9U4nAi1uReSes4ZgXnBbzOpc.jpg",
+      "description": "แพลตฟอร์มดูหนังไทยออนไลน์ฟรี คุณภาพ HD",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "TH",
+        "addressRegion": "Bangkok",
+        "addressLocality": "กรุงเทพมหานคร"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Thailand"
+      },
+      "availableLanguage": ["th", "en"]
+    }
+    </script>
   </Fragment>
 
   <div class="min-h-screen bg-slate-950">
@@ -274,7 +401,7 @@ const pageClass = 'movie-page';
             <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700 mt-8">
               <h3 class="text-xl font-bold text-white mb-4">🔍 คำค้นหายอดนิยม</h3>
               <p class="text-sm text-gray-400 leading-relaxed">
-                สัปเหร่อ 2 เต็มเรื่อง, สัปเหร่อ 2, ดูหนัง สัปเหร่อ 2, ดูหนัง สัปเหร่อ 2 เต็มเรื่อง, 
+                สัปเหร่อ 2 เต็มเรื่อง, สัปเหร่อ 2, ดูหนัง สัปเหร่อ 2 เต็มเรื่อง, 
                 The Undertaker 2, ดูหนังเต็มเรื่อง, พากย์ไทย, ซับไทย, ดูฟรี, 
                 Sup Pa Rer, หนังสยองขวัญไทย, ดูหนังออนไลน์ฟรี, หนังไทย 2026, 
                 ดูหนังไม่กระตุก, streaming thai movie, หนังผี, หนังหลอน, 
@@ -448,12 +575,81 @@ const pageClass = 'movie-page';
             ดูหนังไทยออนไลน์ฟรี HD เต็มเรื่อง ไม่มีโฆษณาคั่น รับชมผ่านมือถือ แท็บเล็ต และคอมพิวเตอร์
           </p>
           
+          <!-- Partner Links -->
+          <div class="pt-8">
+            <h4 class="text-white font-bold text-lg mb-4">🔗 ลิงก์พาร์ทเนอร์</h4>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a 
+                href="https://sup-pa-rer-2.raiselysite.com/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                Sup Pa Rer 2 Site
+              </a>
+              <span class="text-gray-700">|</span>
+              <a 
+                href="https://theundertakerpart2.up.railway.app/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                Railway App
+              </a>
+              <span class="text-gray-700">|</span>
+              <a 
+                href="https://theundertakerpart2.pages.dev/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                Cloudflare Pages
+              </a>
+              <span class="text-gray-700">|</span>
+              <a 
+                href="https://theundertakerpart2.raiselysite.com/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                Undertaker Part 2
+              </a>
+              <span class="text-gray-700">|</span>
+              <a 
+                href="https://theundertaker2.raiselysite.com/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                The Undertaker 2
+              </a>
+              <span class="text-gray-700">|</span>
+              <a 
+                href="https://supparer2uhd.figma.site/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                Figma Site UHD
+              </a>
+              <span class="text-gray-700">|</span>
+              <a 
+                href="https://sup-pa-rer-2.readme.io/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-200 px-3 py-1 rounded-lg hover:bg-slate-800"
+              >
+                ReadMe Docs
+              </a>
+            </div>
+          </div>
+          
           <div class="pt-8 border-t border-slate-800 mt-8">
             <p class="text-gray-500 text-sm">
-              © 2025 Thai Movie Streaming. All rights reserved.
+              © 2026 สัปเหร่อ 2. All rights reserved.
             </p>
             <p class="text-gray-600 text-xs mt-2">
-              เว็บไซต์นี้จัดทำขึ้นเพื่อการศึกษาและเผยแพร่ข้อมูลเกี่ยวกับภาพยนตร์ | ข้อมูลจาก The Movie Database (TMDB)
+              ดูหนังออนไลน์ 2025 - 2026 ฟรี หนังใหม่ Netflix ซีรี่ย์ดังๆ หรือ หนังชนโรง ดูหนังบนมือถือ โหลดเร็วไม่สะดุด ดูผ่าน SmartTV ไม่มีโฆษณา ไม่ต้องโหลด App ดาวน์โหลดหนังได้ สัปเหร่อ 2 เต็มเรื่อง.
             </p>
           </div>
         </div>
@@ -478,6 +674,11 @@ const pageClass = 'movie-page';
     max-width: 100%;
   }
 </style>
+
+
+
+
+
 
 
 
