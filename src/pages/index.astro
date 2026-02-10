@@ -3,6 +3,7 @@
 
 
 
+
 ---
 import MainLayout from '../layouts/main.astro';
 import { baseUrl } from '../lib/base-url';
@@ -66,43 +67,40 @@ const pageClass = 'movie-page';
     <link rel="sitemap" type="application/xml" href="https://supparer2.github.io/theundertakerpart2.github.io/sitemap.xml" />
 
     <!-- Schema.org Structured Data - VideoObject -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": "สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2)",
       "description": "ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังไทย สัปเหร่อ 2 หนังเต็มรูปแบบ ดูหนังออนไลน์ HD 1080p ไม่กระตุก",
-      "thumbnailUrl": "https://image.tmdb.org/t/p/original{movie.backdrop_path}",
-      "uploadDate": "{movie.release_date || '2025-01-01'}",
-      "duration": "PT{Math.floor(movie.runtime / 60)}H{movie.runtime % 60}M",
+      "thumbnailUrl": `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+      "uploadDate": movie.release_date || "2025-01-01",
+      "duration": `PT${Math.floor((movie.runtime || 120) / 60)}H${(movie.runtime || 120) % 60}M`,
       "contentUrl": "https://supparer2.github.io/theundertakerpart2.github.io/",
       "embedUrl": "https://supparer2.github.io/theundertakerpart2.github.io/#watch",
-      "genre": ["ดราม่า", "ตลก", "หนังไทย"],
+      "genre": ["ดราม่า", "ตลก", "หนังไทย", "บันเทิง"],
       "inLanguage": "th-TH",
       "isFamilyFriendly": true,
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "{movie.vote_average?.toFixed(1) || '8.5'}",
+        "ratingValue": movie.vote_average?.toFixed(1) || "8.5",
         "bestRating": "10",
-        "ratingCount": "{movie.vote_count || '1000'}"
+        "ratingCount": movie.vote_count?.toString() || "1000"
       },
-      "actor": {cast.slice(0, 3).map((person: any) => ({
+      "actor": cast.slice(0, 3).map((person) => ({
         "@type": "Person",
         "name": person.name
-      }))}
-    }
-    </script>
+      }))
+    })} />
 
     <!-- Schema.org Structured Data - Movie -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Movie",
       "name": "สัปเหร่อ 2",
       "alternateName": ["The Undertaker 2", "Sup Pa Rer 2"],
-      "description": "{movie.overview || 'หนังไทยที่เต็มไปด้วยความบันเทิงใน สัปเหร่อ 2'}",
-      "image": "https://image.tmdb.org/t/p/original{movie.poster_path}",
-      "datePublished": "{movie.release_date || '2025'}",
+      "description": movie.overview || "หนังไทยที่เต็มไปด้วยความบันเทิงใน สัปเหร่อ 2",
+      "image": `https://image.tmdb.org/t/p/original${movie.poster_path}`,
+      "datePublished": movie.release_date || "2025",
       "director": {
         "@type": "Person",
         "name": "ผู้กำกับไทย"
@@ -116,17 +114,15 @@ const pageClass = 'movie-page';
       "contentRating": "G",
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "{movie.vote_average?.toFixed(1) || '8.5'}",
+        "ratingValue": movie.vote_average?.toFixed(1) || "8.5",
         "bestRating": "10",
         "worstRating": "1",
-        "ratingCount": "{movie.vote_count || '1000'}"
+        "ratingCount": movie.vote_count?.toString() || "1000"
       }
-    }
-    </script>
+    })} />
 
     <!-- Schema.org Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [{
@@ -137,7 +133,7 @@ const pageClass = 'movie-page';
       },{
         "@type": "ListItem",
         "position": 2,
-        "name": "หนังสยองขวัญไทย",
+        "name": "หนังบันเทิงไทย",
         "item": "https://supparer2.github.io/theundertakerpart2.github.io/#info"
       },{
         "@type": "ListItem",
@@ -145,12 +141,10 @@ const pageClass = 'movie-page';
         "name": "สัปเหร่อ 2 เต็มเรื่อง",
         "item": "https://supparer2.github.io/theundertakerpart2.github.io/#watch"
       }]
-    }
-    </script>
+    })} />
 
     <!-- Schema.org Structured Data - WebSite -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Thai Movie Streaming - ดูหนังไทยออนไลน์ฟรี",
@@ -163,12 +157,10 @@ const pageClass = 'movie-page';
         "target": "https://supparer2.github.io/theundertakerpart2.github.io/?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
-    }
-    </script>
+    })} />
 
     <!-- Schema.org Structured Data - Organization (Thailand) -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Thai Movie Streaming",
@@ -186,8 +178,7 @@ const pageClass = 'movie-page';
         "name": "Thailand"
       },
       "availableLanguage": ["th", "en"]
-    }
-    </script>
+    })} />
   </Fragment>
 
   <div class="min-h-screen bg-slate-950">
@@ -696,6 +687,11 @@ const pageClass = 'movie-page';
     max-width: 100%;
   }
 </style>
+
+
+
+
+
 
 
 
