@@ -3,7 +3,6 @@
 
 
 
-
 ---
 import MainLayout from '../layouts/main.astro';
 import { baseUrl } from '../lib/base-url';
@@ -34,7 +33,7 @@ const cast = credits.cast?.slice(0, 8) || [];
 
 // SEO metadata with long tail keywords
 const title = `สัปเหร่อ 2 เต็มเรื่อง | ดูหนังใหม่‼️ The Undertaker 2 พากย์ไทย/ซับไทย ดูฟรี HD`;
-const description = `ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังสยองขวัญไทย สัปเหร่อ 2 หลอนเข้มข้นกว่าที่เคย ความสยองกลับมาอีกครั้งเมื่ออดีตตามหลอกไม่รู้จบ ดูหนังออนไลน์ HD 1080p ไม่กระตุก`;
+const description = `ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังไทย สัปเหร่อ 2 หนังเต็มรูปแบบ ดูหนังออนไลน์ HD 1080p ไม่กระตุก`;
 const keywords = `สัปเหร่อ 2 เต็มเรื่อง, สัปเหร่อ 2, ดูหนัง สัปเหร่อ 2, The Undertaker 2, ดูหนังเต็มเรื่อง, พากย์ไทย, ซับไทย, ดูฟรี, หนังสยองขวัญไทย, Sup Pa Rer, ดูหนังออนไลน์ฟรี, หนังไทย 2026, ดูหนังไม่กระตุก, streaming movie thai, สัปเหร่อ 2 full movie, สัปเหร่อ 2 HD`;
 
 const pageClass = 'movie-page';
@@ -72,15 +71,15 @@ const pageClass = 'movie-page';
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": "สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2)",
-      "description": "ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังสยองขวัญไทย สัปเหร่อ 2 หลอนเข้มข้นกว่าที่เคย ความสยองกลับมาอีกครั้งเมื่ออดีตตามหลอกไม่รู้จบ ดูหนังออนไลน์ HD 1080p ไม่กระตุก",
+      "description": "ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังไทย สัปเหร่อ 2 หนังเต็มรูปแบบ ดูหนังออนไลน์ HD 1080p ไม่กระตุก",
       "thumbnailUrl": "https://image.tmdb.org/t/p/original{movie.backdrop_path}",
       "uploadDate": "{movie.release_date || '2025-01-01'}",
       "duration": "PT{Math.floor(movie.runtime / 60)}H{movie.runtime % 60}M",
       "contentUrl": "https://supparer2.github.io/theundertakerpart2.github.io/",
       "embedUrl": "https://supparer2.github.io/theundertakerpart2.github.io/#watch",
-      "genre": ["สยองขวัญ", "ระทึกขวัญ", "หนังไทย"],
+      "genre": ["ดราม่า", "ตลก", "หนังไทย"],
       "inLanguage": "th-TH",
-      "isFamilyFriendly": false,
+      "isFamilyFriendly": true,
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "{movie.vote_average?.toFixed(1) || '8.5'}",
@@ -101,7 +100,7 @@ const pageClass = 'movie-page';
       "@type": "Movie",
       "name": "สัปเหร่อ 2",
       "alternateName": ["The Undertaker 2", "Sup Pa Rer 2"],
-      "description": "{movie.overview || 'ความสยองกลับมาอีกครั้งใน สัปเหร่อ 2 เมื่ออดีตตามหลอกไม่รู้จบ'}",
+      "description": "{movie.overview || 'หนังไทยที่เต็มไปด้วยความบันเทิงใน สัปเหร่อ 2'}",
       "image": "https://image.tmdb.org/t/p/original{movie.poster_path}",
       "datePublished": "{movie.release_date || '2025'}",
       "director": {
@@ -113,8 +112,8 @@ const pageClass = 'movie-page';
         "name": "Thailand"
       },
       "inLanguage": "th",
-      "genre": ["Horror", "Thriller"],
-      "contentRating": "18+",
+      "genre": ["Entertainment", "Drama", "Comedy"],
+      "contentRating": "G",
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "{movie.vote_average?.toFixed(1) || '8.5'}",
@@ -544,12 +543,13 @@ const pageClass = 'movie-page';
 
               <div class="bg-gradient-to-br from-red-900/40 to-black rounded-xl p-6 border-2 border-red-800/60 mt-8">
                 <h3 class="text-2xl font-bold text-white mb-4">
-                  ⚠️ คำเตือน: สัปเหร่อ 2 มีฉากที่อาจทำให้ตกใจและหวาดกลัว
+                  ✨ สัปเหร่อ 2 เหมาะสำหรับครอบครัว
                 </h3>
                 <p class="text-gray-300 leading-relaxed">
-                  <strong class="text-white">สัปเหร่อ 2 เต็มเรื่อง</strong> เป็นหนังสยองขวัญที่มีความหลอนและความรุนแรงในบางฉาก 
-                  ไม่เหมาะสำหรับเด็กและผู้ที่มีโรคหัวใจ หรือผู้ที่ไม่ชอบหนังแนวสยองขวัญ 
-                  ควรดู <strong class="text-white">สัปเหร่อ 2</strong> ด้วยความระมัดระวัง
+                  <strong class="text-white">สัปเหร่อ 2 เต็มเรื่อง</strong> เป็นหนังที่เหมาะสำหรับทุกคนในครอบครัว 
+                  เต็มไปด้วยความบันเทิง ความสนุกสนาน และเนื้อหาที่ดีสำหรับการรับชมร่วมกัน 
+                  ดู <strong class="text-white">สัปเหร่อ 2</strong> พร้อมครอบครัวได้อย่างสบายใจ 
+                  <strong class="text-white">ดูฟรี พากย์ไทย/ซับไทย</strong> เหมาะสำหรับทุกวัย
                 </p>
               </div>
             </div>
@@ -696,6 +696,9 @@ const pageClass = 'movie-page';
     max-width: 100%;
   }
 </style>
+
+
+
 
 
 

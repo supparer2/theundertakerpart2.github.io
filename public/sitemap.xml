@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
+  <!-- Main Page -->
   <url>
     <loc>https://supparer2.github.io/theundertakerpart2.github.io/</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-02-10T09:22:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     
+    <!-- Video Information -->
     <video:video>
       <video:thumbnail_loc>https://image.tmdb.org/t/p/original/z3T9U4nAi1uReSes4ZgXnBbzOpc.jpg</video:thumbnail_loc>
-      <video:title>สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2)</video:title>
-      <video:description>ดูหนัง สัปเหร่อ 2 เต็มเรื่อง The Undertaker 2 พากย์ไทย ซับไทย ฟรี หนังสยองขวัญไทย HD 1080p</video:description>
+      <video:title>สัปเหร่อ 2 เต็มเรื่อง | The Undertaker 2 พากย์ไทย HD</video:title>
+      <video:description>ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย/ซับไทย ฟรี! หนังไทย สัปเหร่อ 2 เต็มรูปแบบ คุณภาพ HD 1080p ไม่กระตุก ดูฟรีไม่มีโฆษณาคั่น</video:description>
       <video:content_loc>https://supparer2.github.io/theundertakerpart2.github.io/</video:content_loc>
       <video:player_loc>https://supparer2.github.io/theundertakerpart2.github.io/#watch</video:player_loc>
       <video:duration>7200</video:duration>
-      <video:publication_date>2026-01-01T00:00:00+00:00</video:publication_date>
-      <video:family_friendly>no</video:family_friendly>
+      <video:expiration_date>2027-12-31T23:59:59+00:00</video:expiration_date>
+      <video:rating>4.5</video:rating>
+      <video:view_count>10000</video:view_count>
+      <video:publication_date>2026-01-15T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
       <video:requires_subscription>no</video:requires_subscription>
+      <video:uploader info="https://supparer2.github.io/theundertakerpart2.github.io/">Thai Movie Streaming</video:uploader>
       <video:live>no</video:live>
       <video:tag>สัปเหร่อ 2</video:tag>
-      <video:tag>หนังสยองขวัญไทย</video:tag>
+      <video:tag>สัปเหร่อ 2 เต็มเรื่อง</video:tag>
       <video:tag>The Undertaker 2</video:tag>
-      <video:category>Horror</video:category>
+      <video:tag>ดูหนังออนไลน์</video:tag>
+      <video:tag>หนังไทย</video:tag>
+      <video:tag>พากย์ไทย</video:tag>
+      <video:tag>ซับไทย</video:tag>
+      <video:tag>หนัง HD</video:tag>
+      <video:category>Entertainment</video:category>
     </video:video>
     
+    <!-- Image Information -->
     <image:image>
       <image:loc>https://image.tmdb.org/t/p/original/z3T9U4nAi1uReSes4ZgXnBbzOpc.jpg</image:loc>
-      <image:title>สัปเหร่อ 2 โปสเตอร์ หนังเต็มเรื่อง</image:title>
-      <image:caption>ดูหนัง สัปเหร่อ 2 เต็มเรื่อง The Undertaker 2 พากย์ไทย ซับไทย ฟรี</image:caption>
+      <image:title>สัปเหร่อ 2 เต็มเรื่อง โปสเตอร์ หนังไทย HD</image:title>
+      <image:caption>ดูหนัง สัปเหร่อ 2 เต็มเรื่อง (The Undertaker 2) พากย์ไทย ซับไทย ฟรี HD 1080p</image:caption>
+      <image:geo_location>Thailand</image:geo_location>
+      <image:license>https://supparer2.github.io/theundertakerpart2.github.io/</image:license>
     </image:image>
+  </url>
+
+  <!-- Watch Page Section -->
+  <url>
+    <loc>https://supparer2.github.io/theundertakerpart2.github.io/#watch</loc>
+    <lastmod>2026-02-10T09:22:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Info Page Section -->
+  <url>
+    <loc>https://supparer2.github.io/theundertakerpart2.github.io/#info</loc>
+    <lastmod>2026-02-10T09:22:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
